@@ -1,6 +1,7 @@
 package com.sunnysnow.test;
 
 import com.sunnysnow.dao.IUserDao;
+import com.sunnysnow.domain.QueryVo;
 import com.sunnysnow.domain.User;
 import javafx.scene.chart.PieChart;
 import org.apache.ibatis.io.Resources;
@@ -58,12 +59,14 @@ public class MybatisTest {
     @Test
     public void testSave() throws IOException {
         User user = new User();
-        user.setUsername("晴晴1");
+        user.setUsername("mybatis last insertid");
         user.setBirthday(new Date());
         user.setSex("女");
         user.setAddress("江苏南通");
+        System.out.println("保存之前："+user);
         //5.使用代理对象执行方法
         userDao.saveUser(user);
+        System.out.println("保存之后："+user);
     }
 
     /**
@@ -88,5 +91,59 @@ public class MybatisTest {
     public void testDelete() throws IOException {
         //5.使用代理对象执行方法
         userDao.deleteUser(10);
+    }
+
+    /**
+     * 测试查询一个用户
+     */
+    @Test
+    public void testFindOne() throws IOException {
+        //5.使用代理对象执行方法
+        User user = userDao.findById(9);
+        System.out.println(user);
+    }
+
+    /**
+     * 测试模糊查询用户
+     */
+    @Test
+    public void testfindByName() throws IOException {
+        //5.使用代理对象执行方法
+        //预处理占位方式更安全，常用这个
+        List<User> users = userDao.findByName("%王%");
+        //这种是字符串拼接的方式，可以sal注入，一般不用。
+        //List<User> users = userDao.findByName("王");
+        for (User u:users){
+            System.out.println(u);
+        }
+    }
+
+
+    /**
+     * 测试查询总用户条数
+     */
+    @Test
+    public void testfindTotal() throws IOException {
+        //5.使用代理对象执行方法
+        int num = userDao.findTotal();
+        System.out.println("总用户数为："+num);
+    }
+
+
+    /**
+     * 测试使用QueryVo查询条件
+     */
+    @Test
+    public void testfindByQueryVo() throws IOException {
+        QueryVo vo = new QueryVo();
+        User user = new User();
+        user.setUsername("%王%");
+        vo.setUser(user);
+        //5.使用代理对象执行方法
+        //预处理占位方式更安全，常用这个
+        List<User> users = userDao.findUserByVo(vo);
+        for (User u:users){
+            System.out.println(u);
+        }
     }
 }

@@ -13,7 +13,8 @@
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
                 <!-- 2.数据库连接地址 -->
                 <!--<property name="url" value="jdbc:mysql://192.168.16.112:3306/ry"/>-->
-                <property name="url" value="jdbc:mysql://localhost:3306/demomybatis"/>
+                <!--<property name="url" value="jdbc:mysql://localhost:3306/demomybatis"/>-->
+                <property name="url" value="jdbc:mysql://192.168.16.112:3306/demomybatis"/>
                 <!-- 数据库用户名 -->
                 <property name="username" value="root"/>
                 <!-- 数据库用密码 -->

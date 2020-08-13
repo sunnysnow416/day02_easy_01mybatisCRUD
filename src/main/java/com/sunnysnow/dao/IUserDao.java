@@ -1,5 +1,6 @@
 package com.sunnysnow.dao;
 
+import com.sunnysnow.domain.QueryVo;
 import com.sunnysnow.domain.User;
 
 import java.util.List;
@@ -31,6 +32,30 @@ public interface IUserDao {
      * @param userId
      */
     void deleteUser(Integer userId);
+
+    /**
+     * 根据id查询用户
+     */
+    User findById(Integer userId);
+
+    /**
+     * 按名字模糊查询
+     * @return
+     */
+    List<User> findByName(String username);
+
+    /**
+     * 查询总用户数
+     * @return
+     */
+    int findTotal();
+
+    /**
+     * 根据queryVo中的条件查询用户
+     * @param vo
+     * @return
+     */
+    List<User> findUserByVo(QueryVo vo);
 }
 
 
