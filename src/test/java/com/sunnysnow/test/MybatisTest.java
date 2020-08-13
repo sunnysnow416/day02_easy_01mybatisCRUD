@@ -45,7 +45,6 @@ public class MybatisTest {
     }
     @Test
     public  void testFindAll() throws IOException {
-        userDao =session.getMapper(IUserDao.class);
         //5.使用代理对象执行方法
         List<User> users = userDao.findAll();
         for(User user:users){
